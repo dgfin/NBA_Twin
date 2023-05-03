@@ -26,17 +26,17 @@ def nba_twin(bbl_player,bbl_team='None'):
 
 
 def load_teams():
-    with open('C:/Users/David/Desktop/Python_Programs/bball/App/nba_teams.json','r') as f:
+    with open('https://github.com/dgfin/NBA_Twin/blob/main/nba_teams.json','r') as f:
         teams_nba=json.load(f)
         return teams_nba
 
 @st.cache    
 def load_data1():
-    df=pd.read_csv('C:/Users/David/Desktop/Python_Programs/bball/App/.scaled_lat_features.csv',index_col=['Player','Team'])
+    df=pd.read_csv('https://github.com/dgfin/NBA_Twin/blob/main/.scaled_lat_features.csv',index_col=['Player','Team'])
     return df
 @st.cache
 def load_data2():
-    df=pd.read_csv('C:/Users/David/Desktop/Python_Programs/bball/App/.scaled_lat_features_bbl.csv',index_col=['Player','Team'])
+    df=pd.read_csv('https://github.com/dgfin/NBA_Twin/blob/main/.scaled_lat_features_bbl.csv',index_col=['Player','Team'])
     return df
 
 
