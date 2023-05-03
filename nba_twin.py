@@ -30,11 +30,11 @@ def load_teams():
         teams_nba=json.load(f)
         return teams_nba
 
-@st.cache    
+#@st.cache    
 def load_data1():
     df=pd.read_csv('https://github.com/dgfin/NBA_Twin/blob/main/blob/main/.scaled_lat_features.csv',index_col=['Player','Team'])
     return df
-@st.cache
+#@st.cache
 def load_data2():
     df=pd.read_csv('https://github.com/dgfin/NBA_Twin/blob/main/blob/main/scaled_lat_features_bbl.csv',index_col=['Player','Team'])
     return df
