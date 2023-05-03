@@ -46,13 +46,14 @@ nba_teams=load_teams()
 
 #scaled_lat_features_bbl.xs('Würzburg Baskets', level=1, drop_level=False).index.get_level_values(0)
 options=list(scaled_lat_features_bbl.index.get_level_values(1).unique())
-options.insert(0,'None')
+options.insert(0,'League')
 len(options)
 side_bar=st.sidebar
 side_bar.subheader('Select first a Team or the whole League, then some Players!')
 team=side_bar.selectbox('Choose the Team:',options)
 
-if team == 'None':
+if team == 'League':
+    team='None'
     players=list(scaled_lat_features_bbl.index.get_level_values(0))
     player=side_bar.multiselect(f'Now Choose one or more Players from the BBL',players)
 else:
@@ -62,11 +63,15 @@ else:
 #p=st.container()
 st.header ("BBL Player's NBA Twin")
 #st.markdown('''<style>.div-1{background-color: DarkBlue;color:white} </style> <div class="div-1"> <b>The App finds the most similar NBA Player from Season 2021/2022 to recent BBL Players. </b> </div>''', unsafe_allow_html=True)
-st.markdown("<b>This App finds the most similar NBA Player from Season 2021/2022 to recent BBL Players. </b>" , unsafe_allow_html=True)
+st.markdown("<b>This App finds the most similar playstyle NBA Player from Season 2021/2022 to recent BBL Players*. </b>" , unsafe_allow_html=True)
+st.write(''' <small>*BBL Players with > 9 Games played at February 23 are available. </small>''',unsafe_allow_html=True)
+ 
+
 st.write('''Turn any [BBL-Player](https://www.easycredit-bbl.de/statistiken/spieler) \
          into his *Playstyle Twin* [NBA-Player](https://www.nba.com/players). <br> \
-         Navigate the transformation over the sidebar menu.''',unsafe_allow_html=True)
-st.markdown('''<p>The underlying algorithm maps NBA players based on their stats and advanced metrics into latent styles of play. \
+         Navigate the <b> Playstyle-Matching </b> over the sidebar menu.''',unsafe_allow_html=True)
+with st.expander('Description'):
+    st.write('''<p>The underlying algorithm maps NBA players based on their stats and advanced metrics into latent styles of play. \
             Then BBL players are projected in this latent space and the similarity is calculated to each NBA player. <br> \
              </p>''', unsafe_allow_html=True )
 
@@ -76,11 +81,13 @@ if submit:
     res={}
     for pl in player:
         res[pl]=nba_twin(pl,team)
-        #res['Weidemann N. ']=('Immanuel Quickley','NYK')
-        #res['Nelson T. ']=('Max Strus','MIA')
+        
         st.success(f'The most similar NBA Player of {pl} is {res[pl][0]} from {nba_teams[res[pl][1]]}.')
+side_bar.info(':information_source: For more Infos contact me: dgfin@gmx.de ')
+
+
 mp=st.empty()
-mp.success("If you run the NBA_Twin algorithm for TJ Shorts II, it suggests Trae Young as his twin  \
+mp.success("If you run the NBA_Twin algorithm for TJ Shorts II, it suggests Trae Young as his NBA-Twin  \
         (Test this by yourself :male-teacher: )")
 mp2=st.empty()
 with mp2.expander('See  TJ Shorts II and Trae Young in action '):
@@ -96,8 +103,6 @@ with mp2.expander('See  TJ Shorts II and Trae Young in action '):
 if submit:
     mp.empty()
     mp2.empty()
-
-
 
 
 st.markdown("")
