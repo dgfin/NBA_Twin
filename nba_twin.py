@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
-st.set_page_config(page_title='BBL Twin Player',page_icon='basketball.jpg')
+st.set_page_config(page_title='BBL Twin Player',initial_sidebar_state="expanded",page_icon='basketball.jpg')
 
 
 def nba_twin(bbl_player,bbl_team='None'):
@@ -81,7 +81,7 @@ if submit:
     res={}
     for pl in player:
         res[pl]=nba_twin(pl,team)
-        
+        side_bar.warning('If you are on a mobile device close the Sidebar to see the results')
         st.success(f'The most similar NBA Player of {pl} is {res[pl][0]} from {nba_teams[res[pl][1]]}.')
 side_bar.info(':information_source: For more Infos contact me: dgfin@gmx.de ')
 
