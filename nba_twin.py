@@ -81,8 +81,8 @@ if submit:
     res={}
     for pl in player:
         res[pl]=nba_twin(pl,team)
-        side_bar.warning('If you are on a mobile device close the Sidebar to see the results')
         st.success(f'The most similar NBA Player of {pl} is {res[pl][0]} from {nba_teams[res[pl][1]]}.')
+    side_bar.warning('If you are on a mobile device close the Sidebar to see the results')
 side_bar.info(':information_source: For more Infos contact me: dgfin@gmx.de ')
 
 
