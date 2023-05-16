@@ -8,7 +8,7 @@ Created on Mon Mar 27 10:35:39 2023
 import json
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import streamlit as st
 st.set_page_config(page_title='BBL Twin Player',initial_sidebar_state="expanded",page_icon='basketball.jpg')
 
@@ -30,11 +30,11 @@ def load_teams():
         teams_nba=json.load(f)
         return teams_nba
 
-#@st.cache    
+@st.cache    
 def load_data1():
     df=pd.read_csv('.scaled_lat_features.csv',index_col=['Player','Team'])
     return df
-#@st.cache
+@st.cache
 def load_data2():
     df=pd.read_csv('.scaled_lat_features_bbl.csv',index_col=['Player','Team'])
     return df
